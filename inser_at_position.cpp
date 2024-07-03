@@ -31,6 +31,7 @@ void insert_at_position(Node *head, int pos, int v){
     newNode->prev=temp;
 }
 
+
 void print_next(Node *head)
 {
     Node *temp = head;
