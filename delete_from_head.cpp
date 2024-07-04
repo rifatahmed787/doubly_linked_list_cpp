@@ -101,8 +101,15 @@ int main()
     int pos;
     cin >> pos;
     
-    // delete_from_head(head);
-    delete_tail(tail);
+    if(pos>=size(head)){
+        cout<<"Invalid position";
+    }else if(pos == 0){
+        delete_from_head(head);
+    }else if(pos ==size(head)-1){
+        delete_tail(tail);
+    }else{
+        delete_from_pos(head, pos);
+    }
 
     print_next(head);
     print_prev(tail);
