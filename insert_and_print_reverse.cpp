@@ -121,6 +121,7 @@ int main()
             print_node(head);
             print_reverse(tail);
         }
+        
     }
 
     return 0;
