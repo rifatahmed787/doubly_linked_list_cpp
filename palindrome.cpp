@@ -15,17 +15,19 @@ class Node{
 };
 
 
-void insert_at_tail(Node*&head, Node*&tail, int val){
-    Node *newNode=new Node(val);
-   if (head == NULL)
+void insert_at_tail(Node *&head, Node *&tail, int v)
+{
+    Node *newNode = new Node(v);
+
+    if (tail == NULL)
     {
-        head=newNode;
-        tail=newNode;
+        head = newNode;
+        tail = newNode;
         return;
     }
-    newNode->next = head;
-    head->prev = newNode;
-    head = newNode;
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = tail->next;
 }
 
 bool is_Palindrome(Node *head, Node *tail){
