@@ -5,8 +5,8 @@ class Node
 {
 public:
     string str;
-    Node *next = NULL;
-    Node *prev = NULL;
+    Node *next;
+    Node *prev;
 
     Node(string str)
     {
@@ -28,18 +28,45 @@ void insert_at_tail(Node *&head, Node *&tail, string str)
     }
     tail->next = newNode;
     newNode->prev = tail;
-    tail = tail->next;
+    tail = newNode;
 }
 
-void print_next(Node *head)
+Node *find_node(Node *head, string str)
 {
-
     Node *temp = head;
-
     while (temp != NULL)
     {
-        cout << "the str is:" << temp->str << " ";
+        if (temp->str == str)
+        {
+            return temp;
+        }
         temp = temp->next;
+    }
+    return NULL;
+}
+
+void print_list(Node *current, bool forward)
+{
+    if (current == NULL)
+    {
+        cout << "Not Available" << endl;
+        return;
+    }
+    if (forward)
+    {
+        cout << current->str << endl;
+    }
+    else
+    {
+       
+        if (current->prev != NULL)
+        {
+            cout << current->prev->str << endl;
+        }
+        else
+        {
+            cout << "Not Available" << endl;
+        }
     }
 }
 
@@ -47,23 +74,65 @@ int main()
 {
     Node *head = NULL;
     Node *tail = NULL;
+    Node *current = NULL;
+    string str;
+
+    
+    while (true)
+    {
+        cin >> str;
+        if (str == "end")
+            break;
+        insert_at_tail(head, tail, str);
+    }
+
+    
     int t;
     cin >> t;
-
     while (t--)
     {
+        string command;
+        cin >> command;
 
-        string str, end = "end";
-        while (true)
+        if (command == "visit")
         {
-            cin>>str;
-            cout<<"the str"<<str;
-            if (str == end)
-                break;
-            insert_at_tail(head, tail, str);
+            string address;
+            cin >> address;
+            Node *node = find_node(head, address);
+            if (node != NULL)
+            {
+                current = node;
+                cout << current->str << endl;
+            }
+            else
+            {
+                cout << "Not Available" << endl;
+            }
         }
-
-        print_next(head);
+        else if (command == "next")
+        {
+            if (current != NULL && current->next != NULL)
+            {
+                current = current->next;
+                cout << current->str << endl;
+            }
+            else
+            {
+                cout << "Not Available" << endl;
+            }
+        }
+        else if (command == "prev")
+        {
+            if (current != NULL && current->prev != NULL)
+            {
+                current = current->prev;
+                cout << current->str << endl;
+            }
+            else
+            {
+                cout << "Not Available" << endl;
+            }
+        }
     }
 
     return 0;
